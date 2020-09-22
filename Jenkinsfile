@@ -32,11 +32,6 @@ pipeline {
           }
         }
 
-        stage('firefox') {
-          steps {
-            sh 'mvn test -Denv=qa -Dbrowser=firefox'
-          }
-        }
 
       }
     }
@@ -49,12 +44,6 @@ pipeline {
           }
         }
 
-        stage('firefox') {
-          steps {
-            sh 'mvn test -Denv=qa -Dbrowser=firefox'
-          }
-        }
-
         stage('chrome') {
           steps {
             sh 'mvn test -Denv=qa -Dbrowser=chrome'
@@ -64,22 +53,6 @@ pipeline {
       }
     }
 
-    
-    stage('Publish reports') {
-           steps {
-                script {
-                    allure([
-                        includeProperties: false,
-                        jdk: '',
-                        properties: [],
-                        reportBuildPolicy: 'ALWAYS',
-                        results: [[path: '/allure-results']]
-                    ])
-                }
-            }
-        }
-    
-    
 
   }
   tools {
